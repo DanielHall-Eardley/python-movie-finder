@@ -1,10 +1,28 @@
-<h1>Moview search</h1>
+{% extends "base.html" %}
 
-<a href="/favorites">Favorites</a>
+{% block head %}
+<title>Home</title>
+{% endblock %}
 
-<form action="/search" method="post">
-  <label>Title</label>
-  <input name="title" />
+{% block body %}
+<section class="home">
+  {% if error %}
+    <p class="error">{{error}}</p>
+  {% endif %}
+  <form action="/search" method="post" class="search-form">
+    <input name="title" placeholder="Search for movie"/>
+    <button type="submit">Search</button>
+  </form>
+</section>
 
-  <input type="submit" />
-</form>
+<section class="search-results">
+  <div class="list">
+    {% for movie in results %}
+      <a class="list-link" href="/movie/{{movie['imdbID']}}">
+        {{ movie.Title }}
+      </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
+

@@ -1,9 +1,30 @@
-<h1>Movie search</h1>
+{% extends "base.html" %}
 
-<a href="/">Home</a>
-<h2>Movie Details</h2>
+{% block head %}
+<title>Movie</title>
+{% endblock %}
 
-{% if movie %}
-  <p>{{ movie['title'] }}</p>
-  <p>{{ movie['description'] }}</p>
-{% endfor %}
+{% block body %}
+  <section class="movie-details">    
+    <div class="movie">
+      <h3>
+        <span class="movie-title">{{movie.Title}}</span>
+        <span>Released: {{movie.Year}}</span>
+        <span>Metascore: {{movie.Metascore}}</span>
+      </h3>
+      <div class="plot-and-picture">
+        <img src="{{movie.Poster}}" alt="Movie Poster">
+        <p>{{movie.Plot}}</p>
+      </div>
+      <p><b>Starring:</b> {{movie.Actors}}</p>
+      <p><b>Directed by:</b> {{movie.Director}}</p>
+      <p><b>Rating:</b> {{movie.Rated}}</p>
+      <form action="/favourites" method="POST">
+        <input type=hidden value="{{movie.imdbID}}" name="id">
+        <input type=hidden value="{{movie.Title}}" name="title">
+        <button type="submit">Add To Favourites</button>
+      </form>
+    </div>
+  </section>
+{% endblock %}
+

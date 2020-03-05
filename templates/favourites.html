@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>Favourites</title>
+{% endblock %}
+
+{% block body %}
+  <section class="favourites">
+    {% if error %}
+      <p class="error">{{error}}</p>
+    {% endif %}
+    <h2>Favourites</h2>
+      <div class="list">
+        {% for movie in favourites %}
+          <a class="list-link" href="/movie/{{movie['id']}}">{{ movie["title"] }}</a>
+        {% endfor %}
+      </div>
+  </section>
+{% endblock %}
+
+
